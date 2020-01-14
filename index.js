@@ -189,7 +189,7 @@ module.exports.reject = reject;
  * @param {Array} array: An Array to iterate through.
  * @param {Function} func: A Function to be applied to the elements of the Array.
  * 
- * @return {Array of 2 Sub-Arrays}: An Array of 2 Sub-Arrays one of which contains filtered 
+ * @return {Array}: An Array of 2 Sub-Arrays one of which contains filtered 
  * elements, the other which contains rejected elements.
 **/
 
@@ -220,15 +220,15 @@ module.exports.map = map;
 /**
  * pluck: Loops through an Array of Objects and returns the values of a given Property.
  * 
- * @param {Array of Objects} arrOfObj: An Array of Objects to be iterated through.
- * @param {Property} prop: A string representing a Property.
+ * @param {Array} arrOfObj: An Array of Objects to be iterated through.
+ * @param {String} property: A String representing a property.
  * 
  * @return {Array}: An Array containing the value of property for every element in the Array 
  * of Objects.
 **/
 
-function pluck(arrOfObj, prop) {
-    return map(arrOfObj, (obj) => obj[prop]);
+function pluck(arrOfObj, property) {
+    return map(arrOfObj, (obj) => obj[property]);
 }
 
 module.exports.pluck = pluck;
@@ -237,11 +237,13 @@ module.exports.pluck = pluck;
  * every: Determines if every element of a collection resolves to a truthy value when the 
  * callback Function is applied. 
  * 
- * @param {Array of Object} collection: A collection to iterate through.
+ * @param {Array or Object} collection: A collection to iterate through.
  * @param {Function} func: The Function to be applied to every element of the collection.
  * 
- * @return {Boolean}: Returns true if every element resolves to truthy. Returns false 
- * otherwise.
+ * @return {Boolean}: Returns true if the function call of every element return truthy. 
+ * Returns false if at least one function call of an element returns falsy. If a callback 
+ * function is not provided, Every will return true if every element in the collection is a 
+ * truthy value. Returns false if at least one element is falsy.
 **/
 
 function every(collection, func) {
@@ -259,8 +261,10 @@ module.exports.every = every;
  * @param {Array or Object} collection: A collection to iterate through.
  * @param {Function} func: The Function to be applied to every element of the collection.
  * 
- * @return {Boolean}: Returns true if any element resolves to truthy. Returns false if every 
- * element resolves to falsy.
+ * @return {Boolean}: Returns true if the function call of at least one element return truthy. 
+ * Returns false if the function call of every element returns falsy. If a callback function 
+ * is not provided, Some will return true if at least one element in the collection is a 
+ * truthy value. Returns false if all elements in the collection are falsy values.
 **/
 
 function some(collection, func) {
